@@ -1,0 +1,25 @@
+version: "3"
+services:
+  chat-redis-prod:
+    image: redis:latest
+    command:
+      [
+        "redis-server",
+        "--appendonly",
+        "yes",
+        "--requirepass",
+        "devpassredis",
+        "--bind",
+        "0.0.0.0",
+      ]
+    ports:
+      - 6379:6379
+  chat-dbpostgres-prod:
+    image: mariadb:10.7.1
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_DATABASE: chat
+      MARIADB_USER: chatmaster
+      MARIADB_PASSWORD: devpassmariadb
+      MARIADB_ROOT_PASSWORD: devpassmariadbroot
