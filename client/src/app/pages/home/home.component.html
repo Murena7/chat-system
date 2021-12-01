@@ -1,1 +1,10 @@
-<p>home works!</p>
+<div class="container">
+  <p-splitter class="splitter-container" [style]="{'height': '100%'}" layout="vertical" [panelSizes]="[80,20]">
+    <ng-template pTemplate>
+      <div class="chat-container">Panel 1</div>
+    </ng-template>
+    <ng-template pTemplate>
+      <div class="text-container">Panel 2</div>
+    </ng-template>
+  </p-splitter>
+</div>
