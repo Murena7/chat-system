@@ -1,0 +1,17 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 300px;
+  max-width: 80vw;
+  max-height: 600px;
+  min-height: 200px;
+  position: relative;
+}

@@ -1,10 +1,39 @@
 <div class="container">
-  <p-splitter class="splitter-container" [style]="{'height': '100%'}" layout="vertical" [panelSizes]="[80,20]">
-    <ng-template pTemplate>
-      <div class="chat-container">Panel 1</div>
-    </ng-template>
-    <ng-template pTemplate>
-      <div class="text-container">Panel 2</div>
-    </ng-template>
-  </p-splitter>
+  <div class="splitter-container">
+    <div class="chat-container" #chat [scrollTop]="chatScrollPosition">
+      <div class="message-container" *ngFor="let message of messages">
+        <span>{{ message }}</span>
+      </div>
+    </div>
+    <form [formGroup]="chatForm" (ngSubmit)="sendMessage()" class="text-container">
+      <div class="textarea-container">
+        <span class="p-float-label w-full flex">
+          <textarea id="float-input" rows="5" pInputTextarea class="w-full" formControlName="textarea"></textarea>
+          <label for="float-input">Text</label>
+        </span>
+      </div>
+      <div class="button-container sm:ml-2">
+        <button pButton pRipple type="submit" label="Send" class="p-button-outlined"></button>
+        <button
+          *ngIf="!currentUser?.id; else logoutTemplate"
+          pButton
+          pRipple
+          type="button"
+          label="Login"
+          class="p-button-outlined p-button-secondary"
+          (click)="auth()"
+        ></button>
+        <ng-template #logoutTemplate>
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Logout"
+            class="p-button-outlined p-button-secondary"
+            (click)="logout()"
+          ></button>
+        </ng-template>
+      </div>
+    </form>
+  </div>
 </div>

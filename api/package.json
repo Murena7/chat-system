@@ -24,6 +24,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "errorhandler": "^1.5.1",
+    "es6-shim": "^0.35.6",
     "event-dispatch": "^0.4.1",
     "eventemitter3": "^4.0.7",
     "express": "^4.17.1",

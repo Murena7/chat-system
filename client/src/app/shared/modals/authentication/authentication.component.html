@@ -1,0 +1,64 @@
+<div class="container">
+  <p-tabView>
+    <p-tabPanel header="Login">
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex flex-column">
+        <span class="p-float-label mt-3">
+          <input
+            id="login-username"
+            type="text"
+            pInputText
+            formControlName="username"
+            autocomplete="off"
+            name="noautocomplete"
+            class="w-full"
+          />
+          <label for="login-username">Username</label>
+        </span>
+
+        <span class="p-float-label mt-5">
+          <input
+            autocomplete="new-password"
+            id="login-password"
+            type="password"
+            pInputText
+            formControlName="password"
+            name="nonoautocomplete"
+            class="w-full"
+          />
+          <label for="login-password">Password</label>
+        </span>
+        <button pButton pRipple type="submit" label="Login" class="p-button-raised p-button-success w-full mt-5"></button>
+      </form>
+    </p-tabPanel>
+    <p-tabPanel header="Registration">
+      <form [formGroup]="signupForm" (ngSubmit)="signup()">
+        <span class="p-float-label mt-3">
+          <input
+            id="reg-username"
+            type="text"
+            pInputText
+            formControlName="username"
+            autocomplete="off"
+            name="noautocomplete"
+            class="w-full"
+          />
+          <label for="reg-username">Username</label>
+        </span>
+
+        <span class="p-float-label mt-5">
+          <input
+            autocomplete="new-password"
+            id="reg-password"
+            type="password"
+            pInputText
+            formControlName="password"
+            name="nonoautocomplete"
+            class="w-full"
+          />
+          <label for="reg-password">Password</label>
+        </span>
+        <button pButton pRipple type="submit" label="Submit" class="p-button-raised p-button-success w-full mt-5"></button>
+      </form>
+    </p-tabPanel>
+  </p-tabView>
+</div>
