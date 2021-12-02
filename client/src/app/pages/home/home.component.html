@@ -2,7 +2,9 @@
   <div class="splitter-container">
     <div class="chat-container" #chat [scrollTop]="chatScrollPosition">
       <div class="message-container" *ngFor="let message of messages">
-        <span>{{ message }}</span>
+        <span class="font-bold">{{ message.username }}</span
+        >&nbsp;:&nbsp;
+        <span>{{ message.text }}</span>
       </div>
     </div>
     <form [formGroup]="chatForm" (ngSubmit)="sendMessage()" class="text-container">

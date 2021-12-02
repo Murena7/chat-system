@@ -6,6 +6,8 @@ const checkAuth = (roles?: string[]) => {
     if (!req.isAuthenticated()) {
       return res.status(401).send({ message });
     }
+
+    return next();
   };
 };
 

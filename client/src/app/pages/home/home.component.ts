@@ -6,6 +6,7 @@ import { IUser } from '@core/interfaces/user.interface';
 import { Subscription } from 'rxjs';
 import { AuthenticationComponent } from '@shared/modals/authentication/authentication.component';
 import { UserService } from '@core/api-services/user.service';
+import { IMessage } from '@core/interfaces/chat.interface';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public authSub: Subscription;
   public currentUser: IUser | undefined;
 
-  messages: string[] = ['12312', '123123'];
+  messages: IMessage[] = [];
   chatForm = this.fb.group({
     textarea: [null, [Validators.required, Validators.maxLength(500)]],
   });
@@ -45,7 +46,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.chatForm.get('textarea')?.markAsDirty();
     if (this.chatForm.valid) {
-      this.messages.push(this.chatForm.get('textarea')?.value);
+      const message: IMessage = {
+        username: this.currentUser.username,
+        text: this.chatForm.get('textarea')?.value,
+      };
+      this.messages.push(message);
       this.chatForm.reset();
 
       setTimeout(() => {
