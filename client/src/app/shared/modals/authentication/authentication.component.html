@@ -1,5 +1,5 @@
 <div class="container">
-  <p-tabView>
+  <p-tabView [(activeIndex)]="activeTab">
     <p-tabPanel header="Login">
       <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex flex-column">
         <span class="p-float-label mt-3">

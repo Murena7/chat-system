@@ -18,7 +18,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if ([401, 403, 504].indexOf(err.status) !== -1) {
           // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
           this.authenticationService.logout();
-          this.router.navigate(['/login']).then(() => {
+          this.router.navigate(['/']).then(() => {
             location.reload();
           });
         }

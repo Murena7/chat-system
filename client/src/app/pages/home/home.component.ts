@@ -5,6 +5,7 @@ import { AuthService } from '@core/auth/auth.service';
 import { IUser } from '@core/interfaces/user.interface';
 import { Subscription } from 'rxjs';
 import { AuthenticationComponent } from '@shared/modals/authentication/authentication.component';
+import { UserService } from '@core/api-services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('chat') private chatContainer!: ElementRef;
   chatScrollPosition: number = 0;
 
-  constructor(private fb: FormBuilder, public dialogService: DialogService, public authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    public dialogService: DialogService,
+    public authService: AuthService,
+    private userService: UserService,
+  ) {
     this.authSub = this.authService.currentUser.subscribe(res => {
       this.currentUser = res;
     });
@@ -69,7 +75,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    this.authService.logout();
+    this.userService.logout().subscribe(res => {});
   }
 
   ngOnDestroy(): void {
