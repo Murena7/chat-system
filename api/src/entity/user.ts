@@ -1,8 +1,16 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, BaseEntity, BeforeInsert, BeforeUpdate } from 'typeorm';
-import argon2 from 'argon2';
-import { randomBytes } from 'crypto';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  Unique,
+  BaseEntity,
+  BeforeInsert,
+  BeforeUpdate,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
 import moment from 'moment';
-import { Exclude } from 'class-transformer';
+import { Message } from './message';
 
 @Entity()
 export class User extends BaseEntity {
@@ -13,8 +21,11 @@ export class User extends BaseEntity {
   username: string;
 
   @Column({ type: 'varchar', select: false, nullable: false })
-  @Exclude()
   password: string;
+
+  @OneToMany(type => Message, message => message.user)
+  @JoinColumn()
+  messages: Message[];
 
   @Column({ type: 'timestamp' })
   createdAt: string;
@@ -33,14 +44,5 @@ export class User extends BaseEntity {
   public beforeUpdate() {
     const timeNowUTC = moment.utc().toISOString();
     this.updatedAt = timeNowUTC;
-  }
-
-  async hashPassword() {
-    const salt = randomBytes(32);
-    this.password = await argon2.hash(this.password, { salt });
-  }
-
-  async checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
-    return await argon2.verify(this.password, unencryptedPassword);
   }
 }

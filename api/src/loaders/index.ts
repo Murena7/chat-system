@@ -4,8 +4,9 @@ import redisLoader from './redis';
 import dbLoader from './mariadb';
 import Logger from './logger';
 import config from '../config';
+import socketIO from './socketIO';
 
-export default async ({ expressApp }) => {
+export default async ({ expressApp, io }) => {
   const redisConnectionSession = redisLoader(config.redisURLSession);
   Logger.info('✌️ Redis connected!');
 
@@ -17,4 +18,7 @@ export default async ({ expressApp }) => {
 
   await expressLoader({ app: expressApp, redisConnection: redisConnectionSession });
   Logger.info('✌️ Express loaded');
+
+  socketIO(io);
+  Logger.info('✌️ SocketIO loaded');
 };

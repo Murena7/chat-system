@@ -1,5 +1,6 @@
 import { User } from '../entity/user';
 import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
+import { Message } from '@/entity/message';
 
 const typeOrmConfig: MysqlConnectionOptions = {
   name: 'default',
@@ -11,7 +12,7 @@ const typeOrmConfig: MysqlConnectionOptions = {
   database: process.env.MARIADB_DATABASE,
   synchronize: true,
   logging: false,
-  entities: [User],
+  entities: [User, Message],
 };
 
 export { typeOrmConfig };

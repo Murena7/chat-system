@@ -30,7 +30,7 @@ export class AuthenticationComponent implements OnInit {
     if (this.loginForm.valid) {
       const body: IUserSignUpBody = this.loginForm.value;
       this.userService.login(body).subscribe(res => {
-        this.ref.close();
+        this.ref.close(true);
       });
     }
   }

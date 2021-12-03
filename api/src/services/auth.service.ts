@@ -5,6 +5,7 @@ import { getRepository, Repository } from 'typeorm';
 import { User } from '../entity/user';
 import lodash from 'lodash';
 import { IUserSignUpBody } from '@/interfaces/auth.interface';
+import { IVerifyOptions, VerifyFunctionWithRequest } from 'passport-local';
 
 @Service()
 export default class AuthService {
@@ -53,7 +54,11 @@ export default class AuthService {
     }
   }
 
-  public async SignIn(username: string, password: string, cb: Function) {
+  public async SignIn(
+    username: string,
+    password: string,
+    cb: (error: any, user?: any, options?: IVerifyOptions) => void,
+  ): Promise<void> {
     try {
       const userRecord = await this.userRepository
         .createQueryBuilder('user')
